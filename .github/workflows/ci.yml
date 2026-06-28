@@ -10,32 +10,43 @@ on:
 
 jobs:
   windows:
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
         with:
           submodules: recursive
+          
       - name: Set up cache
-        uses: actions/cache@v3
+        uses: actions/cache@v6
         with:
           path: ~/.buildcache
           key: ${{ runner.os }}-win-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-win-
+            
       - name: Install dependencies
         run: ./.ci/windows-msvc/deps.sh
         shell: bash
+        
       - name: Set up MSVC
         uses: ilammy/msvc-dev-cmd@v1
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+        
       - name: Build
         run: ./.ci/windows-msvc/build.sh
         shell: bash
         env:
           ENABLE_COMPATIBILITY_REPORTING: "ON"
+          
       - name: Pack
         run: ./.ci/windows-msvc/upload.ps1
+        
       - name: Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7
         with:
           name: msvc
           path: artifacts/
+          if-no-files-found: error
+          retention-days: 1
+          include-hidden-files: true
