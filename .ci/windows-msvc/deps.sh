@@ -2,7 +2,7 @@
 
 BUILDCACHE_VERSION="0.22.3"
 
-vcpkg install sdl2
+vcpkg install sdl3
 choco install wget ninja
 # Install buildcache
 wget "https://github.com/mbitsnbites/buildcache/releases/download/v${BUILDCACHE_VERSION}/buildcache-win-mingw.zip"
