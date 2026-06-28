@@ -14,7 +14,7 @@ cmake .. \
     -DENABLE_SDL2=OFF \
     -DENABLE_WEB_SERVICE=OFF \
     -DOPENSSL_DLL_DIR="C:\Program Files\OpenSSL\bin" \
-    -DQt5_DIR="C:/Qt/Qt/Qt-5.15.19"
+    -DQt5_DIR="C:\Qt\Qt\Qt-5.15.19\lib\cmake\Qt5"
 
 ninja
 # show the caching efficiency
