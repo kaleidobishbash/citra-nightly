@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           submodules: recursive
+          ref: win-7
           
       - name: Set up cache
         uses: actions/cache@v6
@@ -23,7 +24,10 @@ jobs:
           key: ${{ runner.os }}-win-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-win-
-            
+
+      - name: Download Qt
+        run: git clone https://github.com/${{ github.repository_owner }}/Qt-Win-Shared C:/Qt
+        
       - name: Install dependencies
         run: ./.ci/windows-msvc/deps.sh
         shell: bash
