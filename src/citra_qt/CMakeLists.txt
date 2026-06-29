@@ -284,7 +284,7 @@ if (APPLE)
     endif()
 elseif(WIN32)
     # compile as a win32 gui application instead of a console application
-    target_link_libraries(citra-qt PRIVATE Qt6::EntryPointImplementation)
+    target_link_libraries(citra-qt PRIVATE Qt5::WinMain)
     if(MSVC)
         set_target_properties(citra-qt PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
     elseif(MINGW)
@@ -300,7 +300,7 @@ endif()
 create_target_directory_groups(citra-qt)
 
 target_link_libraries(citra-qt PRIVATE audio_core citra_common citra_core input_common network video_core)
-target_link_libraries(citra-qt PRIVATE Boost::boost nihstro-headers Qt6::Widgets Qt6::Multimedia Qt6::Concurrent)
+target_link_libraries(citra-qt PRIVATE Boost::boost nihstro-headers Qt5::Widgets Qt5::Multimedia Qt5::Concurrent)
 target_link_libraries(citra-qt PRIVATE ${PLATFORM_LIBRARIES} Threads::Threads)
 
 if (ENABLE_OPENGL)
@@ -312,11 +312,11 @@ if (ENABLE_VULKAN)
 endif()
 
 if (NOT WIN32)
-    target_include_directories(citra-qt PRIVATE ${Qt6Gui_PRIVATE_INCLUDE_DIRS})
+    target_include_directories(citra-qt PRIVATE ${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 endif()
 
 if (UNIX AND NOT APPLE)
-    target_link_libraries(citra-qt PRIVATE Qt6::DBus gamemode)
+    target_link_libraries(citra-qt PRIVATE Qt5::DBus gamemode)
 endif()
 
 target_compile_definitions(citra-qt PRIVATE
