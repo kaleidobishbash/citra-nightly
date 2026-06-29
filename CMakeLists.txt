@@ -186,7 +186,7 @@ message(STATUS "Target architecture: ${ARCHITECTURE}")
 
 # boost asio's concept usage doesn't play nicely with some compilers yet.
 add_definitions(-DBOOST_ASIO_DISABLE_CONCEPTS)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # set up output paths for executable binaries
