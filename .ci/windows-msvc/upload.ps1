@@ -33,6 +33,9 @@ Copy-Item README.md -Destination $RELEASE_NAME
 # Copy cross-platform scripting support
 Copy-Item dist\scripting -Destination $RELEASE_NAME -Recurse
 
+# Copy C Runtime Library
+Copy-Item "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC\14.44.35112\x64\Microsoft.VC143.CRT\msvcp140.dll" -Destination $RELEASE_NAME
+
 # Build the final release artifacts
 7z a -tzip $MSVC_BUILD_ZIP $RELEASE_NAME\*
 7z a $MSVC_SEVENZIP $RELEASE_NAME
