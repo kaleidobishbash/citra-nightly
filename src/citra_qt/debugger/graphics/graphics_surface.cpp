@@ -38,7 +38,7 @@ void SurfacePicture::mousePressEvent(QMouseEvent* event) {
     }
 
     if (surface_widget) {
-        const auto pos = event->position().toPoint();
+        const auto pos = event->pos();
         surface_widget->Pick(pos.x() * pixmap.width() / width(),
                              pos.y() * pixmap.height() / height());
     }
