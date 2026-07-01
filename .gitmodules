@@ -33,7 +33,8 @@
     url = https://github.com/ns-emu/ext-libressl-portable.git
 [submodule "libusb"]
     path = externals/libusb/libusb
-    url = https://github.com/libusb/libusb.git
+    url = https://github.com/kaleidobishbash/libusb.git
+	branch = main
 [submodule "cubeb"]
     path = externals/cubeb
     url = https://github.com/kaleidobishbash/cubeb
