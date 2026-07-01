@@ -33,7 +33,7 @@ jobs:
         run: ls "${{ github.workspace }}/externals/glslang"
         
       - name: Update SPIR-V tools
-        run: ./.externals/glslang/update_glslang_sources.py
+        run: python3 "${{ github.workspace }}/externals/glslang/update_glslang_sources.py"
         
       - name: Set up cache
         uses: actions/cache@v6
