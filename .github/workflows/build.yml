@@ -28,7 +28,14 @@ jobs:
         with:
           ref: master-win7
           submodules: recursive
-          
+
+      - name: List files
+        shell: cmd
+        run: dir ./.externals/glslang
+        
+      - name: Update SPIR-V tools
+        run: ./.externals/glslang/update_glslang_sources.py
+        
       - name: Set up cache
         uses: actions/cache@v6
         with:
@@ -52,9 +59,6 @@ jobs:
             
       - name: Disable line ending translation
         run: git config --global core.autocrlf input
-
-      - name: Update SPIR-V tools
-        run: ./.externals/glslang/update_glslang_sources.py
         
       - name: Build
         run: ./.ci/windows.sh
