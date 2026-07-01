@@ -70,6 +70,7 @@ jobs:
         run: |
           choco install ccache wget
           wget "https://archives.boost.io/release/1.88.0/binaries/boost_1_88_0-msvc-14.3-64.exe"
+          Get-ChildItem -Recurse
           \.boost_1_88_0-msvc-14.3-64.exe /sp- /verysilent /suppressmsgboxes /norestart
         if: ${{ matrix.target == 'msvc' }}
             
