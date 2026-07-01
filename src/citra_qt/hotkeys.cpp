@@ -40,7 +40,7 @@ void HotkeyRegistry::LoadHotkeys() {
     }
 }
 
-QShortcut* HotkeyRegistry::GetHotkey(const QString& group, const QString& action, QObject* widget) {
+QShortcut* HotkeyRegistry::GetHotkey(const QString& group, const QString& action, QWidget* widget) {
     Hotkey& hk = hotkey_groups[group][action];
 
     if (!hk.shortcut) {
