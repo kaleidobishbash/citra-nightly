@@ -57,6 +57,9 @@ jobs:
             
       - name: Download Qt
         run: git clone https://github.com/${{ github.repository_owner }}/Qt-Win-Shared C:/Qt
+
+      - name: Install dependencies
+        run: ./vcpkg install catch2
         
       - name: Set up MSVC
         uses: ilammy/msvc-dev-cmd@v1
