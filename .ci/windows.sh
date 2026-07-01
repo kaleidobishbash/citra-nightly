@@ -13,9 +13,7 @@ cmake .. -G Ninja \
     -DENABLE_TESTS=OFF \
     -DENABLE_WEB_SERVICE=OFF \
     -DQt5_DIR="C:\Qt\Qt\Qt-5.15.19\lib\cmake\Qt5" \
-    -DUSE_SYSTEM_CATCH2=ON \
-    -DUSE_SYSTEM_QT=ON \
-    -DUSE_SYSTEM_SDL2=ON
+    -DUSE_SYSTEM_QT=ON
 ninja
 ninja bundle
 
