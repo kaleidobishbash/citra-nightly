@@ -75,6 +75,8 @@ jobs:
         run: git config --global core.autocrlf input
         
       - name: Build
+        env:
+          Boost_DIR: ${{ github.workspace }}/externals/boost
         run: ./.ci/windows.sh
         
       - name: Pack
