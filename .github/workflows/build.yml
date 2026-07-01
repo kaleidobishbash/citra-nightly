@@ -73,10 +73,12 @@ jobs:
             
       - name: Disable line ending translation
         run: git config --global core.autocrlf input
+
+      - name: List Boost dir
+        shell: cmd
+        run: dir "${{ github.workspace }}/externals/boost"
         
       - name: Build
-        env:
-          Boost_DIR: ${{ github.workspace }}/externals/boost
         run: ./.ci/windows.sh
         
       - name: Pack
