@@ -210,7 +210,7 @@ void LoadingScreen::OnLoadProgress(VideoCore::LoadCallbackStage stage, std::size
 
 void LoadingScreen::paintEvent(QPaintEvent* event) {
     QStyleOption opt;
-    opt.initFrom(this);
+    opt.init(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
     QWidget::paintEvent(event);

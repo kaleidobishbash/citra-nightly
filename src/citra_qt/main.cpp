@@ -5,6 +5,7 @@
 #include <clocale>
 #include <memory>
 #include <thread>
+#include <QDesktopWidget>
 #include <QFileDialog>
 #include <QFutureWatcher>
 #include <QLabel>
@@ -189,11 +190,6 @@ GMainWindow::GMainWindow(Core::System& system_)
     // register types to use in slots and signals
     qRegisterMetaType<std::size_t>("std::size_t");
     qRegisterMetaType<Service::AM::InstallStatus>("Service::AM::InstallStatus");
-
-    // Register CameraFactory
-    qt_cameras = std::make_shared<Camera::QtMultimediaCameraHandlerFactory>();
-    Camera::RegisterFactory("image", std::make_unique<Camera::StillImageCameraFactory>());
-    Camera::RegisterFactory("qt", std::make_unique<Camera::QtMultimediaCameraFactory>(qt_cameras));
 
     LoadTranslation();
 
@@ -760,7 +756,7 @@ void GMainWindow::InitializeHotkeys() {
 
 void GMainWindow::SetDefaultUIGeometry() {
     // geometry: 55% of the window contents are in the upper screen half, 45% in the lower half
-    const QRect screenRect = screen()->geometry();
+    const QRect screenRect = QApplication::desktop()->screenGeometry(this);
 
     const int w = screenRect.width() * 2 / 3;
     const int h = screenRect.height() / 2;
@@ -1421,6 +1417,8 @@ void GMainWindow::ShutdownGame() {
 
     discord_rpc->Update();
 
+    Camera::QtMultimediaCameraHandler::ReleaseHandlers();
+
 #ifdef __unix__
     Common::Linux::StopGamemode();
 #endif
@@ -1922,7 +1920,7 @@ void GMainWindow::OnMenuRecentFile() {
 }
 
 void GMainWindow::OnStartGame() {
-    qt_cameras->ResumeCameras();
+    Camera::QtMultimediaCameraHandler::ResumeCameras();
 
     PreventOSSleep();
 
@@ -1954,7 +1952,7 @@ void GMainWindow::OnRestartGame() {
 
 void GMainWindow::OnPauseGame() {
     emu_thread->SetRunning(false);
-    qt_cameras->PauseCameras();
+    Camera::QtMultimediaCameraHandler::StopCameras();
 
     UpdateMenuState();
     AllowOSSleep();
@@ -3203,6 +3201,11 @@ int main(int argc, char* argv[]) {
     }
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    // Disables the "?" button on all dialogs. Disabled by default on Qt6.
+    QCoreApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
+#endif
+    
 #ifdef ENABLE_OPENGL
     QCoreApplication::setAttribute(Qt::AA_DontCheckOpenGLContextThreadAffinity);
     QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
@@ -3220,6 +3223,11 @@ int main(int argc, char* argv[]) {
     system.RegisterImageInterface(std::make_shared<QtImageInterface>());
 
     GMainWindow main_window(system);
+
+    // Register CameraFactory
+    Camera::RegisterFactory("image", std::make_unique<Camera::StillImageCameraFactory>());
+    Camera::RegisterFactory("qt", std::make_unique<Camera::QtMultimediaCameraFactory>());
+    Camera::QtMultimediaCameraHandler::Init();
 
     // Register frontend applets
     Frontend::RegisterDefaultApplets(system);

@@ -235,22 +235,22 @@ find_package(Threads REQUIRED)
 
 if (ENABLE_QT)
     if (NOT USE_SYSTEM_QT)
-        download_qt(6.6.0)
+        download_qt(5.15.2)
     endif()
 
-    find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia Concurrent)
+    find_package(Qt5 REQUIRED COMPONENTS Widgets Multimedia Concurrent)
 
     if (UNIX AND NOT APPLE)
-        find_package(Qt6 REQUIRED COMPONENTS DBus)
+        find_package(Qt5 REQUIRED COMPONENTS DBus)
     endif()
 
     if (ENABLE_QT_TRANSLATION)
-        find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
+        find_package(Qt5 REQUIRED COMPONENTS LinguistTools)
     endif()
 
     if (NOT DEFINED QT_TARGET_PATH)
         # Determine the location of the compile target's Qt.
-        get_target_property(qtcore_path Qt6::Core LOCATION_Release)
+        get_target_property(qtcore_path Qt5::Core LOCATION_Release)
         string(FIND "${qtcore_path}" "/bin/" qtcore_path_bin_pos REVERSE)
         string(FIND "${qtcore_path}" "/lib/" qtcore_path_lib_pos REVERSE)
         if (qtcore_path_bin_pos GREATER qtcore_path_lib_pos)
@@ -293,6 +293,8 @@ if (APPLE)
         set(PLATFORM_LIBRARIES ${PLATFORM_LIBRARIES} ${MOLTENVK_LIBRARY})
     endif()
 elseif (WIN32)
+    # WSAPoll and SHGetKnownFolderPath (AppData/Roaming) didn't exist before WinNT 6.x (Vista)
+    add_definitions(-D_WIN32_WINNT=0x0601 -DWINVER=0x0601)
     set(PLATFORM_LIBRARIES winmm ws2_32)
     if (MINGW)
         # PSAPI is the Process Status API

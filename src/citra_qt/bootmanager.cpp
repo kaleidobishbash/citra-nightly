@@ -566,7 +566,7 @@ void GRenderWindow::mouseReleaseEvent(QMouseEvent* event) {
 
 void GRenderWindow::TouchBeginEvent(const QTouchEvent* event) {
     // TouchBegin always has exactly one touch point, so take the .first()
-    const auto [x, y] = ScaleTouch(event->points().first().position());
+    const auto [x, y] = ScaleTouch(event->touchPoints().first().pos());
     this->TouchPressed(x, y);
 }
 
@@ -575,10 +575,10 @@ void GRenderWindow::TouchUpdateEvent(const QTouchEvent* event) {
     int active_points = 0;
 
     // average all active touch points
-    for (const auto& tp : event->points()) {
+    for (const auto& tp : event->touchPoints()) {
         if (tp.state() & (Qt::TouchPointPressed | Qt::TouchPointMoved | Qt::TouchPointStationary)) {
             active_points++;
-            pos += tp.position();
+            pos += tp.pos();
         }
     }
 

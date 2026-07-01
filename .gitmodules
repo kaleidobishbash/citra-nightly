@@ -1,6 +1,7 @@
 [submodule "boost"]
     path = externals/boost
-    url = https://github.com/ns-emu/ext-boost.git
+    url = https://github.com/kaleidobishbash/ext-boost.git
+	branch = master
 [submodule "nihstro"]
     path = externals/nihstro
     url = https://github.com/neobrain/nihstro.git
@@ -10,15 +11,17 @@
 [submodule "catch2"]
     path = externals/catch2
     url = https://github.com/catchorg/Catch2
+	branch = devel
 [submodule "dynarmic"]
     path = externals/dynarmic
-    url = https://github.com/ns-emu/dynarmic.git
+    url = https://github.com/yuzu-mirror/dynarmic.git
 [submodule "xbyak"]
     path = externals/xbyak
     url = https://github.com/herumi/xbyak.git
 [submodule "fmt"]
     path = externals/fmt
     url = https://github.com/fmtlib/fmt.git
+	branch = 10.x
 [submodule "enet"]
     path = externals/enet
     url = https://github.com/lsalzman/enet.git
@@ -30,10 +33,12 @@
     url = https://github.com/ns-emu/ext-libressl-portable.git
 [submodule "libusb"]
     path = externals/libusb/libusb
-    url = https://github.com/libusb/libusb.git
+    url = https://github.com/kaleidobishbash/libusb.git
+	branch = master
 [submodule "cubeb"]
     path = externals/cubeb
-    url = https://github.com/mozilla/cubeb
+    url = https://github.com/kaleidobishbash/cubeb
+	branch = main
 [submodule "discord-rpc"]
     path = externals/discord-rpc
     url = https://github.com/ns-emu/discord-rpc.git
@@ -42,7 +47,8 @@
     url = https://github.com/arun11299/cpp-jwt.git
 [submodule "teakra"]
     path = externals/teakra
-    url = https://github.com/wwylele/teakra.git
+    url = https://github.com/kaleidobishbash/teakra.git
+	branch = main
 [submodule "lodepng"]
     path = externals/lodepng/lodepng
     url = https://github.com/lvandeve/lodepng.git
@@ -55,6 +61,7 @@
 [submodule "sdl2"]
 	path = externals/sdl2/SDL
 	url = https://github.com/libsdl-org/SDL
+	branch = release-2.32.x
 [submodule "cryptopp-cmake"]
 	path = externals/cryptopp-cmake
 	url = https://github.com/abdes/cryptopp-cmake.git
@@ -66,16 +73,19 @@
     url = https://github.com/septag/dds-ktx
 [submodule "openal-soft"]
     path = externals/openal-soft
-    url = https://github.com/kcat/openal-soft
+    url = https://github.com/kaleidobishbash/openal-soft
+	branch = main
 [submodule "glslang"]
     path = externals/glslang
     url = https://github.com/KhronosGroup/glslang
+	branch = sdk-1.3.261
 [submodule "vma"]
     path = externals/vma
     url = https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator
 [submodule "vulkan-headers"]
     path = externals/vulkan-headers
     url = https://github.com/KhronosGroup/Vulkan-Headers
+	branch = sdk-1.3.261
 [submodule "sirit"]
     path = externals/sirit
     url = https://github.com/ns-emu/sirit
