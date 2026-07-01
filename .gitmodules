@@ -11,6 +11,7 @@
 [submodule "catch2"]
     path = externals/catch2
     url = https://github.com/catchorg/Catch2
+	branch = devel
 [submodule "dynarmic"]
     path = externals/dynarmic
     url = https://github.com/ns-emu/dynarmic.git
