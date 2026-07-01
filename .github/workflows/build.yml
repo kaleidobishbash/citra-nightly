@@ -47,7 +47,7 @@ jobs:
           ref: main-win7
 
       - name: Sync submodules
-        run: git submodule update --remote --recursive
+        run: git submodule update --init --remote --recursive
         
       - name: Set up cache
         uses: actions/cache@v6
