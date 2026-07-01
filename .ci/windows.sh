@@ -1,5 +1,7 @@
 #!/bin/sh -ex
 
+vcpkg install sdl2
+
 mkdir build && cd build
 cmake .. -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
