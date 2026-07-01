@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <QRegularExpression>
+#include <QRegExp>
 #include <QString>
 #include <QValidator>
 
@@ -30,17 +30,15 @@ public:
 
 private:
     /// room name can be alphanumeric and " " "_" "." and "-" and must have a size of 4-20
-    QRegularExpression room_name_regex =
-        QRegularExpression(QStringLiteral("^[a-zA-Z0-9._\\- ]{4,20}$"));
-    QRegularExpressionValidator room_name;
+    QRegExp room_name_regex = QRegExp(QStringLiteral("^[a-zA-Z0-9._- ]{4,20}$"));
+    QRegExpValidator room_name;
 
     /// nickname can be alphanumeric and " " "_" "." and "-" and must have a size of 4-20
-    QRegularExpression nickname_regex =
-        QRegularExpression(QStringLiteral("^[a-zA-Z0-9._\\- ]{4,20}$"));
-    QRegularExpressionValidator nickname;
+    QRegExp nickname_regex = QRegExp(QStringLiteral("^[a-zA-Z0-9._- ]{4,20}$"));
+    QRegExpValidator nickname;
 
     /// ipv4 / ipv6 / hostnames
-    QRegularExpression ip_regex = QRegularExpression(QStringLiteral(
+    QRegExp ip_regex = QRegExp(QStringLiteral(
         // IPv4 regex
         "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|"
         // IPv6 regex
@@ -61,7 +59,7 @@ private:
         "\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:)))(%.+)?$|"
         // Hostname regex
         "^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-zA-Z]{2,}$"));
-    QRegularExpressionValidator ip;
+    QRegExpValidator ip;
 
     /// port must be between 0 and 65535
     QIntValidator port;
