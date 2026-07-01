@@ -31,7 +31,7 @@ jobs:
 
       - name: List files
         shell: cmd
-        run: dir ./.externals/glslang
+        run: dir ${{ github.workspace }}/externals/glslang
         
       - name: Update SPIR-V tools
         run: ./.externals/glslang/update_glslang_sources.py
