@@ -15,7 +15,7 @@ cmake .. -G Ninja \
     -DENABLE_WEB_SERVICE=OFF \
     -DQt5_DIR="C:\Qt\Qt\Qt-5.15.19\lib\cmake\Qt5" \
     -DUSE_SYSTEM_QT=ON \
-    -DENABLE_SDL2=OFF
+    -DUSE_SYSTEM_SDL2=ON
 ninja
 ninja bundle
 
