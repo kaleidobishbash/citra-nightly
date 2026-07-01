@@ -30,7 +30,7 @@ jobs:
           submodules: recursive
 
       - name: Install SPIR-V Tools
-        run: vcpkg install spirv-tools
+        run: vcpkg install sdl2 spirv-tools
         
       - name: Set up cache
         uses: actions/cache@v6
