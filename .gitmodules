@@ -34,7 +34,7 @@
 [submodule "libusb"]
     path = externals/libusb/libusb
     url = https://github.com/kaleidobishbash/libusb.git
-	branch = main
+	branch = master
 [submodule "cubeb"]
     path = externals/cubeb
     url = https://github.com/kaleidobishbash/cubeb
