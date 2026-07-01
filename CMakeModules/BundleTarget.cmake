@@ -28,8 +28,8 @@ if (BUNDLE_TARGET_EXECUTE)
             # This ensures Qt can find its plugins.
             file(WRITE "${executable_parent_dir}/qt.conf" "[Paths]\nPrefix = .")
 
-            find_program(windeployqt_executable windeployqt6 PATHS "${QT_HOST_PATH}/bin")
-            find_program(qtpaths_executable qtpaths6 PATHS "${QT_HOST_PATH}/bin")
+            find_program(windeployqt_executable windeployqt PATHS "${QT_HOST_PATH}/bin")
+            find_program(qtpaths_executable qtpaths-qt5 PATHS "${QT_HOST_PATH}/bin")
 
             # TODO: Hack around windeployqt's poor cross-compilation support by
             # TODO: making a local copy with a prefix pointing to the target Qt.
@@ -38,23 +38,23 @@ if (BUNDLE_TARGET_EXECUTE)
                 file(MAKE_DIRECTORY "${windeployqt_dir}")
                 symlink_safe_copy("${windeployqt_executable}" "${windeployqt_dir}/windeployqt.exe")
                 symlink_safe_copy("${qtpaths_executable}" "${windeployqt_dir}/qtpaths.exe")
-                symlink_safe_copy("${QT_HOST_PATH}/bin/Qt6Core.dll" "${windeployqt_dir}")
+                symlink_safe_copy("${QT_HOST_PATH}/bin/Qt5Core.dll" "${windeployqt_dir}")
 
                 if (EXISTS "${QT_TARGET_PATH}/share")
                     # Unix-style Qt; we need to wire up the paths manually.
                     file(WRITE "${windeployqt_dir}/qt.conf" "\
                         [Paths]\n
                         Prefix = ${QT_TARGET_PATH}\n \
-                        ArchData = ${QT_TARGET_PATH}/share/qt6\n \
+                        ArchData = ${QT_TARGET_PATH}/share/qt5\n \
                         Binaries = ${QT_TARGET_PATH}/bin\n \
-                        Data = ${QT_TARGET_PATH}/share/qt6\n \
-                        Documentation = ${QT_TARGET_PATH}/share/qt6/doc\n \
-                        Headers = ${QT_TARGET_PATH}/include/qt6\n \
+                        Data = ${QT_TARGET_PATH}/share/qt5\n \
+                        Documentation = ${QT_TARGET_PATH}/share/qt5/doc\n \
+                        Headers = ${QT_TARGET_PATH}/include/qt5\n \
                         Libraries = ${QT_TARGET_PATH}/lib\n \
-                        LibraryExecutables = ${QT_TARGET_PATH}/share/qt6/bin\n \
-                        Plugins = ${QT_TARGET_PATH}/share/qt6/plugins\n \
-                        QmlImports = ${QT_TARGET_PATH}/share/qt6/qml\n \
-                        Translations = ${QT_TARGET_PATH}/share/qt6/translations\n \
+                        LibraryExecutables = ${QT_TARGET_PATH}/share/qt5/bin\n \
+                        Plugins = ${QT_TARGET_PATH}/share/qt5/plugins\n \
+                        QmlImports = ${QT_TARGET_PATH}/share/qt5/qml\n \
+                        Translations = ${QT_TARGET_PATH}/share/qt5/translations\n \
                     ")
                 else()
                     # Windows-style Qt; the defaults should suffice.

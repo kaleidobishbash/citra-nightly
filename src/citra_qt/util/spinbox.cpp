@@ -30,7 +30,7 @@
 
 #include <cstdlib>
 #include <QLineEdit>
-#include <QRegularExpression>
+#include <QRegExpValidator>
 #include "citra_qt/util/spinbox.h"
 #include "common/assert.h"
 
@@ -194,7 +194,7 @@ QString CSpinBox::TextFromValue() {
 }
 
 qint64 CSpinBox::ValueFromText() {
-    qsizetype strpos = prefix.length();
+    int strpos = prefix.length();
 
     QString num_string = text().mid(strpos, text().length() - strpos - suffix.length());
     return num_string.toLongLong(nullptr, base);
@@ -216,7 +216,7 @@ QValidator::State CSpinBox::validate(QString& input, int& pos) const {
     if (!prefix.isEmpty() && input.left(prefix.length()) != prefix)
         return QValidator::Invalid;
 
-    qsizetype strpos = prefix.length();
+    int strpos = prefix.length();
 
     // Empty "numbers" allowed as intermediate values
     if (strpos >= input.length() - HasSign() - suffix.length())
@@ -244,15 +244,14 @@ QValidator::State CSpinBox::validate(QString& input, int& pos) const {
     }
 
     // Match string
-    QRegularExpression num_regexp(QRegularExpression::anchoredPattern(regexp));
-    qsizetype num_pos = strpos;
+    QRegExp num_regexp(regexp);
+    int num_pos = strpos;
     QString sub_input = input.mid(strpos, input.length() - strpos - suffix.length());
 
-    auto match = num_regexp.match(sub_input);
-    if (!match.hasMatch())
+    if (!num_regexp.exactMatch(sub_input) && num_regexp.matchedLength() == 0)
         return QValidator::Invalid;
 
-    sub_input = sub_input.left(match.capturedLength());
+    sub_input = sub_input.left(num_regexp.matchedLength());
     bool ok;
     qint64 val = sub_input.toLongLong(&ok, base);
 
@@ -264,7 +263,7 @@ QValidator::State CSpinBox::validate(QString& input, int& pos) const {
         return QValidator::Invalid;
 
     // Make sure we are actually at the end of this string...
-    strpos += match.capturedLength();
+    strpos += num_regexp.matchedLength();
 
     if (!suffix.isEmpty() && input.mid(strpos) != suffix) {
         return QValidator::Invalid;

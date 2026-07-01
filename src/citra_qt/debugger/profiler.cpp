@@ -142,27 +142,27 @@ void MicroProfileWidget::hideEvent(QHideEvent* event) {
 }
 
 void MicroProfileWidget::mouseMoveEvent(QMouseEvent* event) {
-    const auto point = event->position().toPoint();
+    const auto point = event->pos();
     MicroProfileMousePosition(point.x() / x_scale, point.y() / y_scale, 0);
     event->accept();
 }
 
 void MicroProfileWidget::mousePressEvent(QMouseEvent* event) {
-    const auto point = event->position().toPoint();
+    const auto point = event->pos();
     MicroProfileMousePosition(point.x() / x_scale, point.y() / y_scale, 0);
     MicroProfileMouseButton(event->buttons() & Qt::LeftButton, event->buttons() & Qt::RightButton);
     event->accept();
 }
 
 void MicroProfileWidget::mouseReleaseEvent(QMouseEvent* event) {
-    const auto point = event->position().toPoint();
+    const auto point = event->pos();
     MicroProfileMousePosition(point.x() / x_scale, point.y() / y_scale, 0);
     MicroProfileMouseButton(event->buttons() & Qt::LeftButton, event->buttons() & Qt::RightButton);
     event->accept();
 }
 
 void MicroProfileWidget::wheelEvent(QWheelEvent* event) {
-    const auto point = event->position().toPoint();
+    const auto point = event->pos();
     MicroProfileMousePosition(point.x() / x_scale, point.y() / y_scale,
                               event->angleDelta().y() / 120);
     event->accept();
