@@ -1,6 +1,6 @@
 [submodule "boost"]
     path = externals/boost
-    url = https://github.com/ns-emu/ext-boost.git
+    url = https://github.com/ns-emu/ext-boost/tree/80f97ea03b5412baddaba8bef1222b112076c997
 [submodule "nihstro"]
     path = externals/nihstro
     url = https://github.com/neobrain/nihstro.git
