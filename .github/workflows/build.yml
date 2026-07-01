@@ -36,7 +36,10 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.target }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.target }}-
-            
+
+      - name: Download Qt
+        run: git clone https://github.com/${{ github.repository_owner }}/Qt-Win-Shared C:/Qt
+        
       - name: Set up MSVC
         uses: ilammy/msvc-dev-cmd@v1
         env:
