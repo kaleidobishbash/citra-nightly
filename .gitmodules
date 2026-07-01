@@ -69,7 +69,8 @@
     url = https://github.com/septag/dds-ktx
 [submodule "openal-soft"]
     path = externals/openal-soft
-    url = https://github.com/kcat/openal-soft
+    url = https://github.com/kaleidobishbash/openal-soft
+	branch = main
 [submodule "glslang"]
     path = externals/glslang
     url = https://github.com/KhronosGroup/glslang
