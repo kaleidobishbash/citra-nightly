@@ -29,11 +29,8 @@ jobs:
           ref: master-win7
           submodules: recursive
 
-      - name: List files
-        run: ls "${{ github.workspace }}/externals/glslang"
-        
-      - name: Update SPIR-V tools
-        run: python3 "${{ github.workspace }}\externals\glslang\update_glslang_sources.py" --site="${{ github.workspace }}\externals\glslang"
+      - name: Install SPIR-V Tools
+        run: vcpkg install spirv-tools
         
       - name: Set up cache
         uses: actions/cache@v6
