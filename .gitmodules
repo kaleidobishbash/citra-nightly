@@ -1,6 +1,7 @@
 [submodule "boost"]
     path = externals/boost
-    url = https://github.com/ns-emu/ext-boost.git
+    url = https://github.com/kaleidobishbash/ext-boost.git
+	branch = master
 [submodule "nihstro"]
     path = externals/nihstro
     url = https://github.com/neobrain/nihstro.git
